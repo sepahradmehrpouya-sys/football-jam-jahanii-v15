@@ -1,0 +1,181 @@
+<!DOCTYPE html><html lang="fa" dir="rtl"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover"><title>فوتبال جام جهانی - نسخه ارتقا یافته</title><style>
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}html,body{margin:0;width:100%;height:100%;overflow:hidden;background:#071b12;font-family:Tahoma,Arial,sans-serif}body{touch-action:none;overscroll-behavior:none}#game{position:fixed;inset:0;overflow:hidden;background:#0b4f2c}canvas{position:absolute;inset:0;width:100%;height:100%;display:block}.panel{position:absolute;z-index:30;inset:0;background:linear-gradient(135deg,#071a12f5,#123524f5);display:flex;flex-direction:column;align-items:center;justify-content:center;color:#fff;text-align:center;padding:18px;overflow:auto}.panel h1{font-size:30px;margin:0 0 8px}.panel p{margin:5px 0 10px}.options{display:flex;flex-wrap:wrap;justify-content:center;gap:8px;max-width:650px}button{border:0;border-radius:14px;padding:11px 15px;font:700 15px Tahoma;cursor:pointer;color:#fff}.country{background:#243a58;min-width:105px}.country.selected{outline:3px solid #ffd166;background:#3d5e89}.mode,.difficulty{background:#3b4a52}.mode.selected,.difficulty.selected{background:#d96b52;outline:2px solid #fff}#startButton{margin-top:12px;background:#ffd166;color:#111;font-size:19px;min-width:190px}.small{font-size:12px;opacity:.85}.hidden{display:none!important}#score{position:absolute;top:max(9px,env(safe-area-inset-top));left:50%;transform:translateX(-50%);z-index:6;color:#fff;background:#07130fdd;padding:7px 15px;border-radius:15px;font-size:19px;font-weight:bold;direction:ltr;white-space:nowrap;box-shadow:0 3px 12px #0005}#msg{position:absolute;top:55px;left:50%;transform:translateX(-50%);z-index:6;color:#fff;font-size:13px;text-align:center;white-space:nowrap;text-shadow:0 2px 3px #000}.hud{position:absolute;z-index:7;top:54px;left:12px;right:12px;display:flex;justify-content:space-between;pointer-events:none}.badge{background:#07130fc9;color:#fff;padding:5px 9px;border-radius:9px;font-size:11px}.control{position:absolute;bottom:max(18px,env(safe-area-inset-bottom));z-index:10;user-select:none}.joystick{left:max(15px,env(safe-area-inset-left));width:128px;height:128px;border-radius:50%;background:#ffffff25;border:3px solid #ffffff55}.stick{position:absolute;width:56px;height:56px;border-radius:50%;background:#ffffffaa;border:3px solid white;left:50%;top:50%;transform:translate(-50%,-50%)}.actions{right:max(15px,env(safe-area-inset-right));display:flex;gap:10px;align-items:end}.action{width:82px;height:82px;border-radius:50%;color:#fff;font-size:15px;font-weight:bold;box-shadow:0 5px 0 #0005}.action:active{transform:translateY(4px);box-shadow:0 1px 0 #0005}.kick{background:#d62828}.pass{background:#1769aa}.topbtn{position:absolute;right:12px;top:90px;z-index:8;background:#07130fcc;padding:7px 10px;border-radius:9px;font-size:11px}.statsPanel{position:absolute;z-index:25;inset:0;background:#06150ff0;color:#fff;display:flex;align-items:center;justify-content:center;padding:20px}.statsBox{width:min(480px,94vw);background:#173526;border:1px solid #ffffff22;border-radius:20px;padding:20px;text-align:center;box-shadow:0 15px 40px #0008}.statsGrid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:7px;margin:14px 0}.stat{background:#ffffff0d;border-radius:10px;padding:8px;font-size:12px}.stat b{display:block;font-size:17px;margin-top:3px}.primary{background:#ffd166;color:#111}.secondary{background:#40555a}.bracket{max-height:55vh;overflow:auto;text-align:right;background:#0002;padding:10px;border-radius:12px}.round{margin:8px 0}.match{padding:6px 8px;background:#ffffff0b;border-radius:8px;margin:4px 0;font-size:12px}.champ{font-size:27px;margin:10px}.penaltyPanel{position:absolute;z-index:40;inset:0;background:#06150ff5;color:#fff;display:flex;align-items:center;justify-content:center;padding:20px}.penaltyBox{width:min(450px,94vw);background:linear-gradient(180deg,#173f2b,#10281d);border:2px solid #ffffff25;border-radius:20px;padding:18px;text-align:center;box-shadow:0 15px 40px #0008}.duelTitle{font-size:23px;font-weight:900;margin-bottom:7px}.penaltyBtns{display:flex;justify-content:center;gap:8px;margin:14px 0}.penaltyBtns button{min-width:95px;background:#40555a;font-size:14px}.penaltyBtns button:active{transform:scale(.96)}.penaltyInfo{font-size:15px;line-height:1.8;font-weight:bold}.penaltyScore{font-size:25px;font-weight:900;margin:8px 0}.duelField{height:130px;margin:10px auto 5px;max-width:300px;position:relative;overflow:hidden;border-radius:12px;background:linear-gradient(#168447,#0c6436);border:2px solid #ffffff55}.goalMini{position:absolute;top:8px;left:50%;transform:translateX(-50%);font-size:42px}.keeperMini{position:absolute;top:45px;left:50%;transform:translateX(-50%);font-size:28px}.shooterMini{position:absolute;bottom:12px;left:50%;transform:translateX(-50%);font-size:27px}
+@media(max-width:520px){.panel h1{font-size:25px}.country{min-width:92px;padding:9px 10px;font-size:13px}.joystick{width:112px;height:112px}.stick{width:50px;height:50px}.action{width:72px;height:72px;font-size:13px}.hud{top:51px}.statsGrid{font-size:11px}}
+</style></head><body><div id="game"><canvas id="canvas"></canvas>
+<div id="menu" class="panel"><h1>🏆 فوتبال جام جهانی ⚽</h1><p>تیم خودت را انتخاب کن</p><div class="options" id="countries"></div><p style="margin-top:12px">تیم حریف را انتخاب کن</p><div class="options" id="opponents"></div><p style="margin-top:12px">نوع بازی</p><div class="options"><button class="mode selected" data-mode="quick">بازی سریع ⚡</button><button class="mode" data-mode="tournament">جام جهانی 🏆</button></div><p style="margin-top:10px">درجه سختی</p><div class="options"><button class="difficulty" data-level="easy">آسان</button><button class="difficulty selected" data-level="normal">متوسط</button><button class="difficulty" data-level="hard">سخت 🔥</button></div><p class="small">حرکت با جوی‌استیک • پاس و شوت لمسی • صدا با اولین لمس فعال می‌شود</p><button id="startButton">شروع بازی 🎮</button></div>
+<div id="score">🇮🇷 ۰ - ۰ 🇧🇷</div><div id="msg">تیمت را انتخاب کن</div><div class="hud"><div id="time" class="badge">زمان: ۹۰</div><div id="round" class="badge">بازی سریع</div></div><button id="soundBtn" class="topbtn">🔊 صدا</button>
+<div id="joystick" class="joystick control"><div id="stick" class="stick"></div></div><div class="actions control"><button id="pass" class="action pass">پاس<br>⚽</button><button id="kick" class="action kick">شوت<br>💥</button></div>
+<div id="penaltyPanel" class="penaltyPanel hidden"><div class="penaltyBox"><div class="duelTitle">⚡ تک‌به‌تک سرنوشت‌ساز — مثل وقت اضافه</div><div id="penaltyInfo" class="penaltyInfo"></div><div class="penaltyScore" id="penaltyScore">۰ - ۰</div><div class="small">🎮 دقیقاً مثل وقت اضافه بازی کن: با جوی‌استیک حرکت کن و با دکمه «شوت» به دروازه بزن. دکمه‌های چپ/وسط/راست حذف شده‌اند.</div><button id="penaltyStartBtn" class="primary" style="margin-top:12px">شروع تک‌به‌تک 🎮</button></div></div><div id="statsPanel" class="statsPanel hidden"><div class="statsBox"><div id="statsTitle"></div><div id="statsGrid" class="statsGrid"></div><div id="tournamentBox" class="bracket hidden"></div><button id="nextBtn" class="primary">ادامه</button><button id="menuBtn" class="secondary">منوی اصلی</button></div></div></div>
+<script>
+const canvas=document.getElementById('canvas'),ctx=canvas.getContext('2d',{alpha:false});let W=innerWidth,H=innerHeight,dpr=1;function resize(){dpr=Math.min(devicePixelRatio||1,2);canvas.width=innerWidth*dpr;canvas.height=innerHeight*dpr;canvas.style.width=innerWidth+'px';canvas.style.height=innerHeight+'px';ctx.setTransform(dpr,0,0,dpr,0,0);W=innerWidth;H=innerHeight}addEventListener('resize',resize);resize();
+const $=id=>document.getElementById(id),menu=$('menu'),scoreEl=$('score'),msg=$('msg'),timeEl=$('time'),roundEl=$('round'),statsPanel=$('statsPanel'),statsTitle=$('statsTitle'),statsGrid=$('statsGrid'),tournamentBox=$('tournamentBox'),penaltyPanel=$('penaltyPanel'),penaltyInfo=$('penaltyInfo'),penaltyScore=$('penaltyScore');
+const teams={iran:{name:'ایران',flag:'🇮🇷',color:'#e63946'},brazil:{name:'برزیل',flag:'🇧🇷',color:'#f4c20d'},germany:{name:'آلمان',flag:'🇩🇪',color:'#222'},france:{name:'فرانسه',flag:'🇫🇷',color:'#277da1'},argentina:{name:'آرژانتین',flag:'🇦🇷',color:'#74c0e8'},japan:{name:'ژاپن',flag:'🇯🇵',color:'#e63946'},spain:{name:'اسپانیا',flag:'🇪🇸',color:'#d62828'},england:{name:'انگلیس',flag:'🏴',color:'#f1f1f1'},portugal:{name:'پرتغال',flag:'🇵🇹',color:'#1b7f4a'},italy:{name:'ایتالیا',flag:'🇮🇹',color:'#277da1'},netherlands:{name:'هلند',flag:'🇳🇱',color:'#e85d04'},mexico:{name:'مکزیک',flag:'🇲🇽',color:'#2a9d5b'},usa:{name:'آمریکا',flag:'🇺🇸',color:'#3d5a80'},morocco:{name:'مراکش',flag:'🇲🇦',color:'#c1121f'},korea:{name:'کره جنوبی',flag:'🇰🇷',color:'#e63946'},uruguay:{name:'اروگوئه',flag:'🇺🇾',color:'#4ea8de'}};
+const ids=Object.keys(teams);let selectedCountry='iran',selectedOpponent='brazil',selectedLevel='normal',mode='quick',gameStarted=false,gameOver=false,last=performance.now(),timeLeft=90,goalLock=0,stats=null,tournament=null,extraTime=false,penalty=null,penaltyMode=false;const input={x:0,y:0};
+function renderOpponents(){const list=ids.filter(k=>k!==selectedCountry);$('opponents').innerHTML=list.map(k=>`<button class="country ${k===selectedOpponent?'selected':''}" data-opponent="${k}">${teams[k].flag} ${teams[k].name}</button>`).join('');}
+$('countries').innerHTML=ids.slice(0,10).map(k=>`<button class="country ${k===selectedCountry?'selected':''}" data-country="${k}">${teams[k].flag} ${teams[k].name}</button>`).join('');
+renderOpponents();
+const player={x:.25,y:.5,r:21,speed:.8,angle:0},enemy={x:.75,y:.5,r:21,speed:.8,angle:Math.PI},ball={x:.5,y:.5,r:9,vx:0,vy:0,bounce:0};
+const levels={easy:{enemy:.48,aggression:.38},normal:{enemy:.76,aggression:.70},hard:{enemy:1.02,aggression:1.00}};
+function fa(n){return String(Math.round(n)).replace(/\d/g,d=>'۰۱۲۳۴۵۶۷۸۹'[d])}function clamp(v,a,b){return Math.max(a,Math.min(b,v))}function dist(a,b){return Math.hypot(a.x-b.x,a.y-b.y)}
+function freshStats(){return {shots:0,onTarget:0,passes:0,passGood:0,corners:0,posTime:0,enemyPosTime:0,goals:0,enemyGoals:0}}function updateScore(){scoreEl.textContent=`${teams[selectedCountry].flag} ${fa(stats?stats.goals:0)} - ${fa(stats?stats.enemyGoals:0)} ${teams[(mode==='quick'?selectedOpponent:tournament?.opponent)||'brazil']?.flag||'🇧🇷'}`;timeEl.textContent=(extraTime?'وقت اضافه: ':'زمان: ')+fa(Math.ceil(timeLeft))}
+function setMsg(t){msg.textContent=t}
+function resetPositions(){player.x=.28;player.y=.50;player.angle=0;enemy.x=.72;enemy.y=.50;enemy.angle=Math.PI;ball.x=.50;ball.y=.50;ball.vx=0;ball.vy=0;ball.bounce=0}
+let audioCtx=null,soundOn=true;function audio(){if(!soundOn)return;if(!audioCtx)audioCtx=new (window.AudioContext||window.webkitAudioContext)();if(audioCtx.state==='suspended')audioCtx.resume()}function tone(freq,dur,type='sine',gain=.04,delay=0){if(!soundOn)return;audio();if(!audioCtx)return;const o=audioCtx.createOscillator(),g=audioCtx.createGain();o.type=type;o.frequency.value=freq;g.gain.setValueAtTime(0.0001,audioCtx.currentTime+delay);g.gain.exponentialRampToValueAtTime(gain,audioCtx.currentTime+delay+.01);g.gain.exponentialRampToValueAtTime(.0001,audioCtx.currentTime+delay+dur);o.connect(g).connect(audioCtx.destination);o.start(audioCtx.currentTime+delay);o.stop(audioCtx.currentTime+delay+dur+.02)}function shotSound(){tone(110,.07,'triangle',.06);tone(190,.05,'square',.025,.025)}function goalSound(){tone(330,.16,'sawtooth',.05);tone(440,.18,'sine',.06,.12);tone(660,.28,'sine',.07,.27)}
+function startGame(){audio();stats=freshStats();gameStarted=true;gameOver=false;penaltyMode=false;extraTime=false;timeLeft=90;resetPositions();menu.classList.add('hidden');statsPanel.classList.add('hidden');penaltyPanel.classList.add('hidden');roundEl.textContent=mode==='tournament'?'🏆 مرحله '+(tournament?.roundName||'یک‌هشتم نهایی'):'بازی سریع';setMsg('توپ را بگیر؛ پاس یا شوت بزن ⚽');updateScore()}
+function beginTournament(){const pool=ids.slice();const others=pool.filter(x=>x!==selectedCountry).sort(()=>Math.random()-.5).slice(0,15);tournament={round:0,roundName:'یک‌هشتم نهایی',opponent:others[0],queue:others,bracket:[],champion:null};}
+function chooseOpponent(){if(mode==='quick'){tournament={opponent:selectedOpponent,roundName:'بازی سریع'};return}const roundNames=['یک‌هشتم نهایی','یک‌چهارم نهایی','نیمه‌نهایی','فینال'];tournament.roundName=roundNames[tournament.round]||'فینال';tournament.opponent=tournament.queue.shift()||ids.find(x=>x!==selectedCountry)}
+function kick(){if(!gameStarted||gameOver)return;audio();const d=dist(player,ball);if(d>.10){setMsg('کمی به توپ نزدیک‌تر شو!');return}let x=input.x,y=input.y;if(Math.hypot(x,y)<.15){x=Math.cos(player.angle);y=Math.sin(player.angle)}const power=2.45;ball.vx=x*power;ball.vy=y*power;stats.shots++;stats.onTarget+=(x>.35||x<-.35)?1:0;shotSound();setMsg('💥 شوت!')}
+function pass(){if(!gameStarted||gameOver)return;audio();const d=dist(player,ball);if(d>.105){setMsg('برای پاس نزدیک توپ شو!');return}let x=input.x,y=input.y;if(Math.hypot(x,y)<.15){x=Math.cos(player.angle);y=Math.sin(player.angle)}const p=1.35;ball.vx=x*p;ball.vy=y*p;stats.passes++;stats.passGood++;tone(220,.06,'sine',.04);setMsg('🎯 پاس')}
+function scoreGoal(us){goalLock=performance.now()+900;if(us){stats.goals++;setMsg('🎉 گل زدی!');goalSound()}else{stats.enemyGoals++;setMsg('😱 حریف گل زد!');tone(100,.18,'sawtooth',.05)}updateScore();resetPositions()}
+function ai(dt){const lv=levels[selectedLevel];const d=dist(enemy,ball);let tx=ball.x,ty=ball.y;const defendX=.79;if(ball.x<.43&&player.x<.55){tx=.58;ty=.5}else if(ball.x<.50){tx=Math.max(ball.x,defendX-.18);ty=ball.y}else{tx=ball.x;ty=ball.y}const chase=d>.07?1:1.18;enemy.x+=(tx-enemy.x)*lv.enemy*dt*1.95*chase;enemy.y+=(ty-enemy.y)*lv.enemy*dt*1.95*chase;enemy.x=clamp(enemy.x,.035,.965);enemy.y=clamp(enemy.y,.075,.925);if(d<.075){const dx=-1,dy=(.5-enemy.y)*1.05;ball.vx=dx*(1.25+lv.aggression*.82);ball.vy=dy;shotSound()}}
+function collidePlayers(){const minD=.070;let dx=enemy.x-player.x,dy=enemy.y-player.y,d=Math.hypot(dx,dy);if(d<minD){const nx=dx/(d||1),ny=dy/(d||1),push=(minD-d)/2;player.x-=nx*push;player.y-=ny*push;enemy.x+=nx*push;enemy.y+=ny*push;player.x=clamp(player.x,.07,.93);player.y=clamp(player.y,.20,.80);enemy.x=clamp(enemy.x,.07,.93);enemy.y=clamp(enemy.y,.20,.80)}}
+function collidePlayer(){const minD=.070;const d=dist(player,ball);if(d<minD){const nx=(ball.x-player.x)/(d||1),ny=(ball.y-player.y)/(d||1);ball.x=player.x+nx*minD;ball.y=player.y+ny*minD;const toward=ball.vx*nx+ball.vy*ny;if(toward<0){ball.vx-=toward*1.65*nx;ball.vy-=toward*1.65*ny}if(Math.hypot(input.x,input.y)>.05&&Math.hypot(ball.vx,ball.vy)<.65){ball.vx+=input.x*.22;ball.vy+=input.y*.22}}const de=dist(enemy,ball);if(de<.070){const nx=(ball.x-enemy.x)/(de||1),ny=(ball.y-enemy.y)/(de||1);ball.x=enemy.x+nx*.070;ball.y=enemy.y+ny*.070;const toward=ball.vx*nx+ball.vy*ny;if(toward<0){ball.vx-=toward*1.35*nx;ball.vy-=toward*1.35*ny}}}
+function penaltyResetTurn(){
+  input.x=0; input.y=0; $('stick').style.left='50%'; $('stick').style.top='50%';
+  player.x=penalty.phase==='user'?.22:.78; player.y=.50; player.angle=penalty.phase==='user'?0:Math.PI;
+  enemy.x=penalty.phase==='user'?.72:.28; enemy.y=.50; enemy.angle=penalty.phase==='user'?Math.PI:0;
+  ball.x=penalty.phase==='user'?.30:.70; ball.y=.50; ball.vx=0; ball.vy=0;
+  penalty.time=9; penalty.scored=false; penalty.started=false;
+  $('penaltyPanel').classList.remove('hidden');
+  setMsg(penalty.phase==='user'?'🎮 نوبت تو: با جوی‌استیک حرکت کن و با شوت گل بزن!':'🤖 نوبت حریف: دفاع کن و توپ را بگیر!');
+  updatePenaltyUI();
+}
+function startPenalties(){
+  gameStarted=true; gameOver=false; penaltyMode=true; extraTime=true;
+  penalty={round:1,user:0,enemy:0,phase:'user',time:9,scored:false,started:false};
+  penaltyPanel.classList.remove('hidden'); updatePenaltyUI(); tone(180,.15,'square',.05);
+}
+function beginPenaltyTurn(){
+  if(!penalty)return;
+  audio();
+  penalty.started=true;
+  $('penaltyPanel').classList.add('hidden');
+  input.x=0; input.y=0; $('stick').style.left='50%'; $('stick').style.top='50%';
+  setMsg(penalty.phase==='user'?'🎮 حمله کن! از دروازه‌بان رد شو و شوت بزن ⚽':'🧤 حالا دروازه‌بان هستی؛ جلوی شوت حریف را بگیر!');
+  updatePenaltyUI();
+}
+function updatePenaltyUI(){
+  if(!penalty)return;
+  penaltyScore.textContent=`${fa(penalty.user)}  -  ${fa(penalty.enemy)}`;
+  const opp=(mode==='quick'?selectedOpponent:tournament?.opponent)||'brazil';
+  const roundText=penalty.round<=5?`${fa(penalty.round)} از ۵`:`${fa(penalty.round)} (مرگ ناگهانی)`;
+  penaltyInfo.innerHTML=`👤 ${teams[selectedCountry].name} <span style="opacity:.65">در برابر</span> ${teams[opp].name}<br>⚡ تک‌به‌تک ${roundText} — ${penalty.phase==='user'?'تو حمله می‌کنی 🎮':'تو دفاع می‌کنی 🧤'}${penalty.started?` — ${fa(Math.ceil(penalty.time))} ثانیه`:''}`;
+  roundEl.textContent=penalty.started?(penalty.phase==='user'?'⚡ تک‌به‌تک — حمله':'⚡ تک‌به‌تک — دفاع'):'⚡ تک‌به‌تک — آماده‌سازی';
+}
+function endShootout(winner){
+  if(!penalty)return;
+  penaltyMode=false; gameStarted=false; gameOver=true; penaltyPanel.classList.add('hidden');
+  stats.shootoutWinner=winner;
+  setMsg(winner==='user'?'🏆 تک‌به‌تک‌ها را بردی!':'😢 تک‌به‌تک‌ها را باختی');
+  showStats(false);
+}
+function finishPenalties(){
+  if(!penalty)return;
+  if(penalty.user>penalty.enemy) endShootout('user');
+  else if(penalty.enemy>penalty.user) endShootout('enemy');
+  else { penalty.round++; penalty.phase='user'; penaltyResetTurn(); }
+}
+function nextShootoutPhase(){
+  if(!penalty)return;
+  if(penalty.phase==='user'){
+    // User's attack is over; opponent gets the next attack.
+    penalty.phase='enemy'; penaltyResetTurn(); return;
+  }
+  // One complete round is finished.
+  if(penalty.round>=5){
+    if(penalty.user!==penalty.enemy){finishPenalties();return;}
+    penalty.round++;
+  }else{
+    // Early finish when the score is already impossible to catch.
+    const roundsLeft=5-penalty.round;
+    if(Math.abs(penalty.user-penalty.enemy)>roundsLeft){finishPenalties();return;}
+    penalty.round++;
+  }
+  penalty.phase='user'; penaltyResetTurn();
+}
+function updatePenalty(dt){
+  if(!penalty || !penalty.started)return;
+  penalty.time-=dt;
+  const lv=levels[selectedLevel];
+  if(penalty.phase==='user'){
+    const il=Math.hypot(input.x,input.y);
+    if(il>.05){player.x+=input.x*player.speed*1.15*dt;player.y+=input.y*player.speed*1.15*dt;player.angle=Math.atan2(input.y,input.x)}
+    player.x=clamp(player.x,.08,.82); player.y=clamp(player.y,.20,.80);
+    enemy.x+=(ball.x-enemy.x)*dt*(1.15+lv.enemy*.45); enemy.y+=(ball.y-enemy.y)*dt*(1.15+lv.enemy*.45);
+    enemy.x=clamp(enemy.x,.58,.91); enemy.y=clamp(enemy.y,.22,.78);
+    collidePlayer();
+    ball.x+=ball.vx*dt; ball.y+=ball.vy*dt; ball.vx*=Math.pow(.16,dt); ball.vy*=Math.pow(.16,dt);
+    if(ball.y<.20){ball.y=.20;ball.vy=Math.abs(ball.vy)*.72} if(ball.y>.80){ball.y=.80;ball.vy=-Math.abs(ball.vy)*.72}
+    if(dist(enemy,ball)<.075 && Math.hypot(ball.vx,ball.vy)>.18){ball.vx=-Math.abs(ball.vx)*.65;ball.vy+=(.5-enemy.y)*1.6;setMsg('🧤 دروازه‌بان توپ را گرفت!');penalty.time=0}
+    if(ball.x>.955){penalty.user++;goalSound();setMsg('⚽ گل! حالا نوبت حریفه!');setTimeout(()=>{if(penalty)nextShootoutPhase()},450);return}
+    if(penalty.time<=0){setMsg('⏱️ فرصت حمله تمام شد!');setTimeout(()=>{if(penalty)nextShootoutPhase()},250);return}
+  }else{
+    const il=Math.hypot(input.x,input.y);
+    if(il>.05){player.x+=input.x*player.speed*1.05*dt;player.y+=input.y*player.speed*1.05*dt;player.angle=Math.atan2(input.y,input.x)}
+    player.x=clamp(player.x,.08,.44); player.y=clamp(player.y,.20,.80);
+    enemy.x+=(ball.x-enemy.x)*dt*(1.05+lv.enemy*.38); enemy.y+=(ball.y-enemy.y)*dt*(1.05+lv.enemy*.38);
+    enemy.x=clamp(enemy.x,.10,.92); enemy.y=clamp(enemy.y,.22,.78);
+    if(dist(enemy,ball)<.08 && Math.hypot(ball.vx,ball.vy)<.25){ball.vx=-2.05;ball.vy=(.50-enemy.y)*1.8;shotSound()}
+    if(dist(player,ball)<.09 && Math.hypot(ball.vx,ball.vy)>.18){ball.vx=Math.abs(ball.vx)*.60;ball.vy*=-.60;setMsg('🧤 سیو کردی!');penalty.time=0}
+    ball.x+=ball.vx*dt;ball.y+=ball.vy*dt;ball.vx*=Math.pow(.16,dt);ball.vy*=Math.pow(.16,dt);
+    if(ball.y<.20){ball.y=.20;ball.vy=Math.abs(ball.vy)*.72} if(ball.y>.80){ball.y=.80;ball.vy=-Math.abs(ball.vy)*.72}
+    if(ball.x<.045){penalty.enemy++;goalSound();setMsg('😱 حریف گل زد!');setTimeout(()=>{if(penalty)nextShootoutPhase()},450);return}
+    if(penalty.time<=0){setMsg('🧤 حریف نتونست گل بزنه!');setTimeout(()=>{if(penalty)nextShootoutPhase()},250);return}
+  }
+  updatePenaltyUI();
+}
+function update(dt){if(!gameStarted||gameOver)return;if(penaltyMode){updatePenalty(dt);return}timeLeft-=dt;if(timeLeft<=0){timeLeft=0;if(mode==='tournament' && stats.goals===stats.enemyGoals){if(!extraTime){extraTime=true;timeLeft=30;resetPositions();setMsg('⏱️ مساوی شد! وقت اضافه شروع شد');updateScore();return}else{startPenalties();return}}finishMatch();return}
+const fieldL=.045,fieldR=.955,fieldT=.175,fieldB=.825,goalT=.405,goalB=.595;
+const il=Math.hypot(input.x,input.y);if(il>.05){player.x+=input.x*player.speed*dt;player.y+=input.y*player.speed*dt;player.angle=Math.atan2(input.y,input.x)}
+player.x=clamp(player.x,fieldL+.025,fieldR-.025);player.y=clamp(player.y,fieldT+.035,fieldB-.035);ai(dt);collidePlayers();
+const speed=Math.hypot(ball.vx,ball.vy),steps=Math.max(1,Math.min(6,Math.ceil(speed*dt/.012)));const sub=dt/steps;
+for(let s=0;s<steps;s++){
+  collidePlayer();
+  ball.x+=ball.vx*sub;ball.y+=ball.vy*sub;
+  const drag=Math.pow(.18,sub);ball.vx*=drag;ball.vy*=drag;
+  collidePlayer();
+  if(ball.y<fieldT+ball.r/H){ball.y=fieldT+ball.r/H;ball.vy=Math.abs(ball.vy)*.78;ball.bounce=.2}
+  if(ball.y>fieldB-ball.r/H){ball.y=fieldB-ball.r/H;ball.vy=-Math.abs(ball.vy)*.78;ball.bounce=.2}
+  // تیرهای دروازه: برخورد با تیر گل نیست؛ توپ برمی‌گردد.
+  const postY1=goalT,postY2=goalB,postR=.018;
+  for(const px of [fieldL,fieldR]){
+    for(const py of [postY1,postY2]){
+      const dx=ball.x-px,dy=ball.y-py,rr=postR+Math.max(ball.r/W,ball.r/H),dd=Math.hypot(dx,dy);
+      if(dd<rr){
+        const nx=dx/(dd||1),ny=dy/(dd||1);ball.x=px+nx*rr;ball.y=py+ny*rr;
+        const v=ball.vx*nx+ball.vy*ny;if(v<0){ball.vx-=1.9*v*nx;ball.vy-=1.9*v*ny}tone(180,.035,'square',.025);
+      }
+    }
+  }
+  if(ball.x<fieldL-ball.r/W){if(ball.y>goalT+postR&&ball.y<goalB-postR){scoreGoal(false);return}else{ball.x=fieldL+ball.r/W;ball.vx=Math.abs(ball.vx)*.82;stats.corners++}}
+  if(ball.x>fieldR+ball.r/W){if(ball.y>goalT+postR&&ball.y<goalB-postR){scoreGoal(true);return}else{ball.x=fieldR-ball.r/W;ball.vx=-Math.abs(ball.vx)*.82;stats.corners++}}
+}
+if(Math.hypot(ball.vx,ball.vy)<.018){ball.vx=0;ball.vy=0}if(dist(player,ball)<.09)stats.posTime+=dt;else if(dist(enemy,ball)<.09)stats.enemyPosTime+=dt;updateScore()}
+function finishMatch(){gameOver=true;showStats(false)}
+function showStats(tourneyEnd){statsPanel.classList.remove('hidden');statsTitle.innerHTML=tourneyEnd?'<div class="champ">🏆 قهرمان جام جهانی شدی!</div>':`<h2>📊 آمار بازی</h2><div>${teams[selectedCountry].flag} ${teams[selectedCountry].name} ${fa(stats.goals)} - ${fa(stats.enemyGoals)} ${teams[tournament.opponent].flag} ${teams[tournament.opponent].name}</div>`;const total=Math.max(.1,stats.posTime+stats.enemyPosTime);const p=Math.round(stats.posTime/total*100);statsGrid.innerHTML=[['شوت',stats.shots],['شوت در چارچوب',stats.onTarget],['پاس',stats.passes],['پاس موفق',stats.passGood],['مالکیت',p+'٪'],['کرنر',stats.corners]].map(x=>`<div class="stat">${x[0]}<b>${typeof x[1]==='number'?fa(x[1]):x[1]}</b></div>`).join('');tournamentBox.classList.toggle('hidden',!tourneyEnd&&mode!=='tournament');if(mode==='tournament'){tournamentBox.innerHTML='<b>مسیر جام جهانی</b>'+tournament.bracket.map(m=>`<div class="match">${m}</div>`).join('')}$('nextBtn').textContent=tourneyEnd?'شروع دوباره':(mode==='tournament'&&stats.shootoutWinner==='enemy'?'پایان جام و منوی اصلی':'ادامه')}
+function nextMatch(){
+  if(mode==='quick'){statsPanel.classList.add('hidden');menu.classList.remove('hidden');gameStarted=false;return}
+  if(stats.shootoutWinner==='enemy'){
+    statsPanel.classList.add('hidden');menu.classList.remove('hidden');gameStarted=false;setMsg('جام جهانی برای تو تمام شد 😢');return;
+  }
+  if(tournament.round>=3){tournament.champion=selectedCountry;showStats(true);return}
+  tournament.round++; chooseOpponent();
+  tournament.bracket.push(`${teams[selectedCountry].flag} ${teams[selectedCountry].name}  ➜  ${teams[tournament.opponent].name}`);
+  statsPanel.classList.add('hidden'); startGame();
+}
+
+function draw(){ctx.clearRect(0,0,W,H);const g=ctx.createLinearGradient(0,0,0,H);g.addColorStop(0,'#159447');g.addColorStop(.55,'#11773b');g.addColorStop(1,'#0a5b30');ctx.fillStyle=g;ctx.fillRect(0,0,W,H);
+const fieldL=.045,fieldR=.955,fieldT=.175,fieldB=.825,goalT=.405,goalB=.595;
+ctx.fillStyle='#17252a';ctx.fillRect(0,0,W,H*.14);ctx.fillRect(0,H*.86,W,H*.14);for(let i=0;i<70;i++){ctx.fillStyle=i%3===0?'#ffd166':i%3===1?'#fff':'#d62828';ctx.beginPath();ctx.arc((i*97%W),H*.06+(i%4)*6,2.2,0,Math.PI*2);ctx.fill();ctx.beginPath();ctx.arc((i*53%W),H*.94-(i%4)*6,2.2,0,Math.PI*2);ctx.fill()}
+ctx.fillStyle='#138640';ctx.fillRect(fieldL*W,fieldT*H,(fieldR-fieldL)*W,(fieldB-fieldT)*H);for(let i=0;i<10;i++){ctx.fillStyle=i%2?'#ffffff08':'#00000008';ctx.fillRect((fieldL+i*(fieldR-fieldL)/10)*W,fieldT*H,(fieldR-fieldL)*W/10,(fieldB-fieldT)*H)}
+ctx.strokeStyle='#fff';ctx.lineWidth=3;ctx.strokeRect(fieldL*W,fieldT*H,(fieldR-fieldL)*W,(fieldB-fieldT)*H);ctx.beginPath();ctx.moveTo(W/2,fieldT*H);ctx.lineTo(W/2,fieldB*H);ctx.stroke();ctx.beginPath();ctx.arc(W/2,H/2,Math.min(W,H)*.10,0,Math.PI*2);ctx.stroke();
+ctx.strokeRect(fieldL*W,.34*H,.14*W,.32*H);ctx.strokeRect(.81*W,.34*H,.14*W,.32*H);ctx.strokeRect(fieldL*W,.405*H,.065*W,.19*H);ctx.strokeRect(.89*W,.405*H,.065*W,.19*H);
+function goalNet(x,flip){const gw=.055*W,gh=(goalB-goalT)*H,top=goalT*H,left=flip?x-gw:x;ctx.fillStyle='#ffffff22';ctx.fillRect(left,top,gw,gh);ctx.strokeStyle='#fff';ctx.lineWidth=4;ctx.strokeRect(left,top,gw,gh);ctx.lineWidth=1;ctx.strokeStyle='#ffffff66';for(let i=1;i<7;i++){ctx.beginPath();ctx.moveTo(left+gw*i/7,top);ctx.lineTo(left+gw*i/7,top+gh);ctx.stroke()}for(let j=1;j<6;j++){ctx.beginPath();ctx.moveTo(left,top+gh*j/6);ctx.lineTo(left+gw,top+gh*j/6);ctx.stroke()}}
+goalNet(fieldL*W,false);goalNet(fieldR*W,true);ctx.fillStyle='#fff';for(const x of [fieldL*W,fieldR*W]){for(const y of [goalT*H,goalB*H]){ctx.beginPath();ctx.arc(x,y,7,0,Math.PI*2);ctx.fill();ctx.strokeStyle='#bbb';ctx.lineWidth=2;ctx.stroke()}}
+function shadow(o){ctx.fillStyle='#00000045';ctx.beginPath();ctx.ellipse(o.x*W+4,o.y*H+7,o.r*1.05,o.r*.43,0,0,Math.PI*2);ctx.fill()}shadow(player);shadow(enemy);shadow(ball);
+function person(o,color,n){ctx.beginPath();ctx.arc(o.x*W,o.y*H,o.r+3,0,Math.PI*2);ctx.fillStyle='#ffffff44';ctx.fill();const pg=ctx.createRadialGradient(o.x*W-7,o.y*H-8,2,o.x*W,o.y*H,o.r);pg.addColorStop(0,'#ffffffaa');pg.addColorStop(.25,color);pg.addColorStop(1,'#111');ctx.beginPath();ctx.arc(o.x*W,o.y*H,o.r,0,Math.PI*2);ctx.fillStyle=pg;ctx.fill();ctx.strokeStyle='#fff';ctx.lineWidth=2.5;ctx.stroke();ctx.fillStyle='#fff';ctx.font='bold 13px Arial';ctx.textAlign='center';ctx.textBaseline='middle';ctx.fillText(n,o.x*W,o.y*H)}person(player,teams[selectedCountry].color,'۱');person(enemy,teams[tournament?.opponent||selectedOpponent||'brazil'].color,'۲');
+ctx.beginPath();ctx.arc(ball.x*W,ball.y*H,ball.r+2,0,Math.PI*2);ctx.fillStyle='#222';ctx.fill();const bg=ctx.createRadialGradient(ball.x*W-3,ball.y*H-4,1,ball.x*W,ball.y*H,ball.r);bg.addColorStop(0,'#fff');bg.addColorStop(1,'#d9d9d9');ctx.beginPath();ctx.arc(ball.x*W,ball.y*H,ball.r,0,Math.PI*2);ctx.fillStyle=bg;ctx.fill();ctx.strokeStyle='#333';ctx.stroke();}
+function loop(now){const dt=Math.min((now-last)/1000,.033);last=now;update(dt);draw();requestAnimationFrame(loop)}requestAnimationFrame(loop);
+$('countries').onclick=e=>{const b=e.target.closest('button[data-country]');if(!b)return;selectedCountry=b.dataset.country;document.querySelectorAll('#countries .country').forEach(x=>x.classList.toggle('selected',x===b));if(selectedOpponent===selectedCountry)selectedOpponent=ids.find(x=>x!==selectedCountry);renderOpponents();updateScore()};$('opponents').onclick=e=>{const b=e.target.closest('button[data-opponent]');if(!b)return;selectedOpponent=b.dataset.opponent;document.querySelectorAll('#opponents .country').forEach(x=>x.classList.toggle('selected',x===b));updateScore()};document.querySelectorAll('.mode').forEach(b=>b.onclick=()=>{document.querySelectorAll('.mode').forEach(x=>x.classList.remove('selected'));b.classList.add('selected');mode=b.dataset.mode});document.querySelectorAll('.difficulty').forEach(b=>b.onclick=()=>{document.querySelectorAll('.difficulty').forEach(x=>x.classList.remove('selected'));b.classList.add('selected');selectedLevel=b.dataset.level});$('startButton').onclick=()=>{if(mode==='tournament'){beginTournament();chooseOpponent();tournament.bracket.push(`${teams[selectedCountry].flag} ${teams[selectedCountry].name}  ➜  ${teams[tournament.opponent].name}`)}else chooseOpponent();startGame()};$('kick').onpointerdown=kick;$('pass').onpointerdown=pass;$('soundBtn').onclick=()=>{soundOn=!soundOn;$('soundBtn').textContent=soundOn?'🔊 صدا':'🔇 صدا';if(soundOn)audio()};$('nextBtn').onclick=nextMatch;$('penaltyStartBtn').onclick=beginPenaltyTurn;$('menuBtn').onclick=()=>{statsPanel.classList.add('hidden');menu.classList.remove('hidden');gameStarted=false};
+let dragging=false;function joy(e){const r=$('joystick').getBoundingClientRect();let x=e.clientX-(r.left+r.width/2),y=e.clientY-(r.top+r.height/2),m=r.width/2-27,d=Math.hypot(x,y);if(d>m){x=x/d*m;y=y/d*m}input.x=x/m;input.y=y/m;$('stick').style.left=`calc(50% + ${x}px)`;$('stick').style.top=`calc(50% + ${y}px)`;audio()}function stop(){dragging=false;input.x=input.y=0;$('stick').style.left='50%';$('stick').style.top='50%'}$('joystick').onpointerdown=e=>{dragging=true;$('joystick').setPointerCapture(e.pointerId);joy(e)};$('joystick').onpointermove=e=>{if(dragging)joy(e)};$('joystick').onpointerup=stop;$('joystick').onpointercancel=stop;addEventListener('keydown',e=>{let x=0,y=0;if(e.key==='ArrowLeft'||e.key==='a')x--;if(e.key==='ArrowRight'||e.key==='d')x++;if(e.key==='ArrowUp'||e.key==='w')y--;if(e.key==='ArrowDown'||e.key==='s')y++;const l=Math.hypot(x,y);if(l){input.x=x/l;input.y=y/l;player.angle=Math.atan2(input.y,input.x);audio()}if(e.code==='Space')kick();if(e.key.toLowerCase()==='p')pass()});addEventListener('keyup',e=>{if(['ArrowLeft','ArrowRight','ArrowUp','ArrowDown','a','d','w','s'].includes(e.key)&&!dragging){input.x=input.y=0}});updateScore();
+</script></body></html>
